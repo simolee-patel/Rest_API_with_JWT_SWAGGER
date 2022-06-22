@@ -120,7 +120,7 @@ module.exports = function (router) {
      *                   type: string
      *     responses:
      *       200:
-     *         description: The User was successfully created
+     *         description: The User was login successfully
      *         content:
      *           application/json:
      *             schema:
@@ -135,8 +135,33 @@ module.exports = function (router) {
         })
     });
 
-    router.post('/welcome', authenticateJWT, function (req, res) {
-        console.log("data")
+
+    /**
+ * @swagger
+ * /welcome/{id}:
+ *   get:
+ *     summary: Delete the User by id
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: User id
+ *     responses:
+ *       200:
+ *         description: get all recoreds
+ *         contens:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       500:
+ *         description: enter the correct id
+ */
+
+    router.get('/welcome/:id', authenticateJWT, function (req, res) {
+        console.log("data", req.params.id)
         return res.status(200).send("welcomeee")
     });
 }
